@@ -1,0 +1,26 @@
+<%- include("header") -%>
+    <div class="box" id="heading">
+      <% if (listTitle === "Saturday" || listTitle === "Sunday") { %>
+        <h1 style="color: rgb(253, 46, 253)"><%=listTitle%></h1>
+      <% } else { %>
+        <h1 style="color: blue"><%=listTitle%></h1>
+      <% } %>
+    </div>
+
+    <div class="box">
+        <% newTasks.forEach(function(newTask){ %>
+          <form action="/delete" method="post">
+            <div class="item">
+              <input type="checkbox" name="checkbox" value=<%=newTask._id%> onChange="this.form.submit()">
+              <input type="hidden" name="listName" value=<%=listTitle%>>
+              <a href= <%=`${newTask.name}` %>> <%= newTask.name %> </a>
+            </div>
+          </form>
+        <% });                                 %>
+        <form class="item" action="/" method="post">
+          <input type="text" name="task" placeholder="Add Task" autocomplete="off" required="true">
+          <button type="submit" name="list" value=<%=listTitle%>>+</button>
+        </form>
+    </div>
+
+<%- include("footer") -%>
